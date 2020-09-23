@@ -1,3 +1,8 @@
-const knex = require("knex")({client: 'pg'});
+const knex = require("knex");
+
 const knexfile = require("./knexfile.js");
-module.exports = knex(knexfile)
+
+// it is working while you add database
+const database = "development";
+
+module.exports = knex(knexfile[database]);

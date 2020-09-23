@@ -18,6 +18,20 @@ server.get('/',async(req,res,next)=>{
      next(err)
     }
 })
+server.post('/',async(req,res,next)=>{
+    try{
+    const [id] = await db.insert({
+        carmake:req.body.carmake,
+        carmodel:req.body.carmodel,
+        carVin:req.body.carVin,
+        mileage:req.body.mileage
+    }).into("cars2")
+    const newcar = await db('cars2').where("id",id).first();
+    res.status(201).json(newcar);
+    }catch(err){
+     next(err)
+    }
+})
 server.listen(port,()=>{
     console.log(`listening on ${port}`)
 })
